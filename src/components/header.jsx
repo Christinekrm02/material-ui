@@ -1,19 +1,37 @@
 import React from "react";
-import { AppBar, Toolbar } from "@material-ui/core";
+import { AppBar, Toolbar, IconButton, makeStyles } from "@material-ui/core";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    fontFamily: "Ubuntu, sans-serif",
+  },
+  register: {
+    color: "orange",
+  },
+}));
 
 const navLinks = [
-  { title: `About`, path: `/about-us` },
-  { title: `Blog`, path: `/blog` },
-  { title: `Contact`, path: `/contact` },
-  { title: `More`, path: `/more` },
+  { title: `about us`, path: `/about-us` },
+  { title: `product`, path: `/product` },
+  { title: `blog`, path: `/blog` },
+  { title: `contact`, path: `/contact` },
+  { title: `faq`, path: `/faq` },
 ];
 
-const Header = () => {
+export default function Header() {
+  const classes = useStyles();
   return (
     <AppBar position="static">
-      <Toolbar></Toolbar>
+      <Toolbar>
+        <IconButton className={classes.register}>
+          <PersonAddIcon fontSize="large" />
+        </IconButton>
+      </Toolbar>
     </AppBar>
   );
-};
-
-export default Header;
+}
