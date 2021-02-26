@@ -1,5 +1,14 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton, makeStyles } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  makeStyles,
+  List,
+  ListItem,
+  ListItemText,
+  Container,
+} from "@material-ui/core";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const useStyles = makeStyles(theme => ({
@@ -13,14 +22,27 @@ const useStyles = makeStyles(theme => ({
   register: {
     color: "orange",
   },
+  navbarContainer: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    maxWidth: "lg",
+  },
+  navItems: {
+    display: `flex`,
+    justifyContent: `flex-end`,
+  },
+  navLink: {
+    textDecoration: `none`,
+    textTransform: `uppercase`,
+    color: `white`,
+  },
 }));
 
 const navLinks = [
-  { title: `about us`, path: `/about-us` },
-  { title: `product`, path: `/product` },
-  { title: `blog`, path: `/blog` },
-  { title: `contact`, path: `/contact` },
-  { title: `faq`, path: `/faq` },
+  { title: `About`, path: `/about-us` },
+  { title: `Blog`, path: `/blog` },
+  { title: `Contact`, path: `/contact` },
+  { title: `More`, path: `/more` },
 ];
 
 export default function Header() {
@@ -28,9 +50,23 @@ export default function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton className={classes.register}>
-          <PersonAddIcon fontSize="large" />
-        </IconButton>
+        <Container className={classes.navbarContainer}>
+          <IconButton className={classes.register}>
+            <PersonAddIcon fontSize="large" />
+          </IconButton>
+          <List
+            component="nav"
+            aria-labelledby="main navigation"
+            className={classes.navItems}>
+            {navLinks.map(({ title, path }) => (
+              <a href={path} key={title} className={classes.navLink}>
+                <ListItem button>
+                  <ListItemText primary={title} />
+                </ListItem>
+              </a>
+            ))}
+          </List>
+        </Container>
       </Toolbar>
     </AppBar>
   );
